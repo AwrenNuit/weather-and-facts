@@ -10,16 +10,16 @@ const weatherRouter = require('./routes/weatherRouter');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-/* Routes */
+// Routes
 app.use('/api/weather', weatherRouter);
 
 // Serve static files
 app.use(express.static('build'));
 
-// App Set //
+// App Set
 const PORT = process.env.PORT || 5000;
 
-/** Listen * */
+// Listen
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
