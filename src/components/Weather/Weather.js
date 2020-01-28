@@ -26,11 +26,16 @@ class Weather extends Component{
         <p>Summary: {today.summary}</p>
         <p>High: {today.temperatureHigh}</p>
         <p>Low: {today.temperatureLow}</p>
-        <p>Humidity: {today.humidity}</p>
+        <p>Humidity: {today.humidity * 100}%</p>
         <p>Wind Speed: {today.windSpeed}</p>
-        <p>Moon Phase: {today.moonPhase}</p>
+        <p>Moon Phase: {today.moonPhase * 100}% illuminated</p>
         {this.state.temp < 35 ? 
           <p>Dress warm today!</p>
+          :
+          ''
+        }
+        {this.state.temp > 75 ?
+          <p>Dress light today!</p>
           :
           ''
         }
