@@ -1,11 +1,44 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
+import logger from 'redux-logger';
+import App from './components/App/App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+function* rootSaga() {
+  yield takeLatest('GET_WEATHER', getWeather);
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+function* getWeather(){
+  try{
+    const getResponse = yield axios.get(`/api/weather`);
+    yield put({type: `SET_WEATHER`, payload: getResponse.data});
+  }
+  catch(error){
+    console.log('error in GET weather', error);
+  }
+}
+
+const weatherReducer = (state=[], action) => action.type === `SET_WEATHER` ? action.payload : state;
+
+
+const sagaMiddleware = createSagaMiddleware();
+
+const middlewareList = process.env.NODE_ENV === 'development' ?
+  [sagaMiddleware, logger] :
+  [sagaMiddleware];
+
+const store = createStore(
+  weatherReducer,
+  applyMiddleware(...middlewareList),
+);
+
+sagaMiddleware.run(rootSaga);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);
