@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   let apiKey = process.env.API_KEY;
   axios.get(`https://api.darksky.net/forecast/${apiKey}/44.9778,-93.2650`)
   .then(response=>{
-      res.send(response.data.daily);
+      res.send(response.data.daily.data[0]);
   })
   .catch(error=>{
     console.log('ERROR IN / GET ---------------------------------------->', error);

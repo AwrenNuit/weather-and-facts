@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
+import { put, takeLatest } from 'redux-saga/effects';
 import logger from 'redux-logger';
+import axios from 'axios';
 import App from './components/App/App';
 
 function* rootSaga() {
@@ -12,6 +14,7 @@ function* rootSaga() {
 
 function* getWeather(){
   try{
+    console.log('in saga');
     const getResponse = yield axios.get(`/api/weather`);
     yield put({type: `SET_WEATHER`, payload: getResponse.data});
   }
