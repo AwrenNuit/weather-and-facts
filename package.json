@@ -19,9 +19,9 @@
     "nodemon": "^1.18.10"
   },
   "scripts": {
-    "start": "react-scripts build && node server/server.js",
+    "start": "react-scripts build && node server/server",
     "client": "react-scripts start",
-    "server": "nodemon —watch server server/server.js",
+    "server": "nodemon —watch server/server.js",
     "test": "react-scripts test —env=jsdom",
     "eject": "react-scripts eject"
   },
