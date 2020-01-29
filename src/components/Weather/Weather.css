@@ -1,0 +1,13 @@
+.history-container {
+  width: 450px;
+  height: 200px;
+  background-color: #302d58;
+  color: white;
+  border-radius: 25px;
+  box-shadow: 3px 3px 15px lightgrey inset;
+  text-align: center;
+}
+
+.history-text {
+  padding: 25px 20px;
+}

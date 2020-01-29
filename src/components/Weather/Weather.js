@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import './Weather.css';
 import Axios from 'axios';
 
 class Weather extends Component{
@@ -41,7 +42,6 @@ class Weather extends Component{
 
     return(
       <>
-      <img src={this.state.art} alt="art" />
         <p>Summary: {today.summary}</p>
         <p>High: {this.state.high}</p>
         <p>Low: {this.state.low}</p>
@@ -58,7 +58,9 @@ class Weather extends Component{
           :
           ''
         }
-        <p>In {history.year}, {history.text}</p>
+        <div className="history-container">
+          <p className="history-text">In {history.year}, {history.text}</p>
+        </div>
       </>
     );
   }
