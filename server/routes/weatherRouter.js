@@ -15,4 +15,14 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/history', (req, res) => {
+  axios.get(`http://history.muffinlabs.com/date`)
+  .then(response=>{
+      res.send(response.data.data.Events[0]);
+  })
+  .catch(error=>{
+    console.log('ERROR IN /history GET ---------------------------------------->', error);
+    res.sendStatus(500);
+  });
+});
 module.exports = router;

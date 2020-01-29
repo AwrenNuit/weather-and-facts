@@ -4,12 +4,12 @@ import {connect} from 'react-redux';
 class Weather extends Component{
 
   state = {
-    temp: 0
+    temp: 0,
   }
 
   componentDidMount(){
-    console.log('in there');
-    this.props.dispatch({type: `GET_WEATHER`});
+    this.props.dispatch({type: `GET_WEATHER`}); 
+    this.props.dispatch({type: `GET_HISTORY_FACT`}); 
   }
 
   componentDidUpdate(prevProps){
@@ -20,6 +20,7 @@ class Weather extends Component{
 
   render(){
     let today = this.props.reduxState;
+    let history = this.props.historyFact;
 
     return(
       <>
@@ -39,13 +40,15 @@ class Weather extends Component{
           :
           ''
         }
+        <p>In {history.year}, {history.text}</p>
       </>
     );
   }
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  reduxState
+  reduxState: reduxState.weatherReducer,
+  historyFact: reduxState.historyFactReducer
 });
 
 export default connect(putReduxStateOnProps)(Weather);
