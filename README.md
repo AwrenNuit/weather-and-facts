@@ -19,4 +19,7 @@ This small app was built out to practice using APIs. Local Minneapolis weather i
 - 'npm run server' to start the server
 - 'npm run client' to start the client
 
+## Future Plans
+- Incorporate moon phase images
+
 If you have questions or concerns, email me at awren.nuit@gmail.com
