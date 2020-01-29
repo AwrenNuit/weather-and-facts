@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import Axios from 'axios';
 
 class Weather extends Component{
 
   state = {
     temp: 0,
+    high: '',
+    low: ''
   }
 
   componentDidMount(){
@@ -13,20 +16,34 @@ class Weather extends Component{
   }
 
   componentDidUpdate(prevProps){
-    if(this.props.reduxState !== prevProps.reduxState){
-      this.setState({temp:this.props.reduxState.temperatureHigh});
+    if(this.props.weather !== prevProps.weather){
+      this.setState({temp:this.props.weather.temperatureHigh});
+      this.highNumber(Math.round(this.props.weather.temperatureHigh));
+      this.lowNumber(Math.round(this.props.weather.temperatureLow));
     }
   }
 
+  highNumber = (num) => {
+    Axios.get(`http://numbersapi.com/${num}/trivia`).then(response=>{
+      this.setState({high: response.data});
+    })
+  }
+
+  lowNumber = (num) => {
+    Axios.get(`http://numbersapi.com/${num}/trivia`).then(response=>{
+      this.setState({low: response.data});
+    })
+  }
+
   render(){
-    let today = this.props.reduxState;
+    let today = this.props.weather;
     let history = this.props.historyFact;
 
     return(
       <>
         <p>Summary: {today.summary}</p>
-        <p>High: {today.temperatureHigh}</p>
-        <p>Low: {today.temperatureLow}</p>
+        <p>High: {this.state.high}</p>
+        <p>Low: {this.state.low}</p>
         <p>Humidity: {today.humidity * 100}%</p>
         <p>Wind Speed: {today.windSpeed}</p>
         <p>Moon Phase: {today.moonPhase * 100}% illuminated</p>
@@ -47,7 +64,7 @@ class Weather extends Component{
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  reduxState: reduxState.weatherReducer,
+  weather: reduxState.weatherReducer,
   historyFact: reduxState.historyFactReducer
 });
 
