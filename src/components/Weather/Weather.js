@@ -23,13 +23,13 @@ class Weather extends Component{
     }
   }
 
-  highNumber = (num) => {
+  highNumber = num => {
     Axios.get(`http://numbersapi.com/${num}/trivia`).then(response=>{
       this.setState({high: response.data});
     })
   }
 
-  lowNumber = (num) => {
+  lowNumber = num => {
     Axios.get(`http://numbersapi.com/${num}/trivia`).then(response=>{
       this.setState({low: response.data});
     })
@@ -41,6 +41,7 @@ class Weather extends Component{
 
     return(
       <>
+      <img src={this.state.art} alt="art" />
         <p>Summary: {today.summary}</p>
         <p>High: {this.state.high}</p>
         <p>Low: {this.state.low}</p>
