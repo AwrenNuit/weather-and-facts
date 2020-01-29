@@ -1,13 +1,36 @@
+.dress-text {
+  padding: 20px;
+}
+
 .history-container {
+  margin: 0 auto;
   width: 450px;
   height: 200px;
   background-color: #302d58;
-  color: white;
   border-radius: 25px;
   box-shadow: 3px 3px 15px lightgrey inset;
   text-align: center;
 }
 
+.history-head {
+  padding-top: 20px;
+}
+
 .history-text {
-  padding: 25px 20px;
+  padding: 0 20px;
+}
+
+.weather-container {
+  margin: 0 auto;
+  width: 450px;
+  height: 400px;
+  background-color: #302d58;
+  border-radius: 25px;
+  box-shadow: 3px 3px 15px lightgrey inset;
+  text-align: center;
+}
+
+.weather-padding {
+  margin: 0;
+  padding: 20px;
 }
